@@ -1,0 +1,32 @@
+city,lat,lng,country,iso2,admin_name,capital,population,population_proper
+Port Moresby,-9.4789,147.1494,Papua New Guinea,PG,National Capital,primary,700000,317374
+Lae,-6.7303,147.0008,Papua New Guinea,PG,Morobe,admin,193000,100677
+Popondetta,-8.7656,148.2347,Papua New Guinea,PG,Northern,admin,65000,49244
+Madang,-5.2167,145.8000,Papua New Guinea,PG,Madang,admin,62023,29339
+Mendi,-6.1478,143.6572,Papua New Guinea,PG,Southern Highlands,admin,56055,56055
+Arawa,-6.2250,155.5667,Papua New Guinea,PG,Bougainville,,40266,36443
+Mount Hagen,-5.8600,144.2400,Papua New Guinea,PG,Western Highlands,admin,29765,29765
+Kimbe,-5.5575,150.1550,Papua New Guinea,PG,West New Britain,admin,27191,27191
+Wewak,-3.5500,143.6333,Papua New Guinea,PG,East Sepik,admin,25143,25143
+Goroka,-6.0833,145.3833,Papua New Guinea,PG,Eastern Highlands,admin,21507,21507
+Kokopo,-4.3500,152.2736,Papua New Guinea,PG,East New Britain,admin,20262,20262
+Bulolo,-7.2000,146.6467,Papua New Guinea,PG,Morobe,,20000,20000
+Kavieng,-2.5667,150.8000,Papua New Guinea,PG,New Ireland,admin,19849,19849
+Alotau,-10.3167,150.4333,Papua New Guinea,PG,Milne Bay,admin,15939,15939
+Tari,-5.8489,142.9506,Papua New Guinea,PG,Hela,admin,15413,15413
+Daru,-9.0833,143.2000,Papua New Guinea,PG,Western,admin,12879,12879
+Vanimo,-2.6667,141.2833,Papua New Guinea,PG,West Sepik,admin,11863,11863
+Kundiawa,-6.0167,144.9667,Papua New Guinea,PG,Chimbu,admin,11553,11553
+Tabubil,-5.2750,141.2264,Papua New Guinea,PG,Western,,10270,10270
+Wau,-7.3389,146.7167,Papua New Guinea,PG,Morobe,,9442,9442
+Kiunga,-6.1167,141.3000,Papua New Guinea,PG,Western,,8265,8265
+Rabaul,-4.2000,152.1833,Papua New Guinea,PG,East New Britain,,7024,7024
+Kieta,-6.2158,155.6328,Papua New Guinea,PG,Bougainville,,6958,6958
+Aitape,-3.1333,142.3500,Papua New Guinea,PG,West Sepik,,6931,6931
+Kerema,-7.9667,145.7667,Papua New Guinea,PG,Gulf,admin,6551,6551
+Lorengau,-2.0306,147.2722,Papua New Guinea,PG,Manus,admin,6313,6313
+Wabag,-5.4919,143.7217,Papua New Guinea,PG,Enga,admin,4072,4072
+Namatanai,-3.6667,152.4333,Papua New Guinea,PG,New Ireland,,1542,1542
+Buin,-6.7460,155.6850,Papua New Guinea,PG,Bougainville,,750,750
+Kurumul,-5.8550,144.6311,Papua New Guinea,PG,Jiwaka,admin,,
+Buka,-5.4219,154.6728,Papua New Guinea,PG,Bougainville,admin,,
