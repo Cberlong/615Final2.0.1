@@ -5,6 +5,7 @@ library(shinydashboard)
 library(shinydashboardPlus)
 library(leaflet)
 library(readr)
+library(ggplot2)
 
 
 ### Don't forget to comment your code!!
@@ -19,7 +20,7 @@ PNGui <- navbarPage(id = "tabs",
                     navbarMenu(title = "The Pacific",
                                
                                tabPanel("Regions of the Pacific",
-                                        img(src="Oceania_UN_Geoscheme_-_Map_with_Zones.svg",
+                                        img(src="PNG-pacific.png",
                                             height="600",
                                             width="800")
                                ),
@@ -37,56 +38,42 @@ PNGui <- navbarPage(id = "tabs",
                     
                     navbarMenu(
                       title = "General Information",
-                      tabPanel("About Kiribati",
-                               img(src="KR-flag.jpg", width="200"),
-                               p(style="font-size:12pt", "In the Republic of Kiribati, more than 119,000 people
-              live across 33 islands stretching over
-              3.5 million square kilometers of the Pacific.
-              The World Bank’s support to Kiribati is focused on
-              improving roads, sustainable fisheries,
-              health system strengthening, access to clean,
-              safe drinking water and economic growth. ")
+                      tabPanel("About Papua New Guinea",
+                               img(src="PNG flag.jpg", width="200"),
+                               p(style="font-size:12pt", "In the Independent State of Papua New Guinea, 
+                                 a diverse population of close to 17 million people resides across the eastern half of New Guinea and numerous offshore islands, 
+                                 spanning an area of 462,840 square kilometers. the World Bank is currently supporting 11 active projects 
+                                 across the country worth approximately US$503 million, including areas like transportation, food safety, health and sanitation.")
                       ),
                       
-                      tabPanel("Kiribati world location"),
-                      tabPanel("Regional Map"),
+                      tabPanel("Kiribati world location",
+                               img(src="PNG-around.gif",
+                                   height="600",
+                                   width="800")),
                       tabPanel("Country Map",
-                               leafletOutput("mycountrymap", height = 700),
-                               p()
+                               img(src="PNG map.gif",
+                                   height="600",
+                                   width="800")
                       )
                     ),
                     
-                    nav_panel("Demographics", p("Tables and plots go here."),
+                    nav_panel("Demographics",
+                              p("Population Trends"),
+                                       # This will display the plot from the server logic
+                                       plotOutput("populationPlot")
+                              ,
+                              p(style="font-size:12pt", "As shown above, the plot suggests that there is
+                                a growing trend in Papua New Guinea.")
                               
-                              shinypanels::box("box", colapsed=F)
                     ),
                     
                     nav_panel("Pacific Region",
-                              p("A regional map goes here.
-              Be sure to include comparisons -- maybe a table,
-              definitely different graphs"),
-                              
-                              shinydashboardPlus::box(
-                                solidHeader = FALSE,
-                                title = "Status summary",
-                                background = NULL,
-                                width = 4,
-                                status = "danger",
-                                footer = fluidRow(
-                                  column(
-                                    width = 6,
-                                    descriptionBlock(
-                                      number = "17%",
-                                      numberColor = "green",
-                                      numberIcon = icon("caret-up"),
-                                      header = "$35,210.43",
-                                      text = "TOTAL REVENUE",
-                                      rightBorder = TRUE,
-                                      marginBottom = FALSE
-                                    )
-                                  )
-                                )
-                              )
+                              p("And here is a GDP growth rate of Papua New Guinea and other two countries near it, 
+                                including Soloman Islands and Indonesia."),
+                              img(src="PNG-comparison.jpg",
+                                  height="600",
+                                  width="800")
+                        
                     ),
                     
                     nav_panel("SWOT", p("Analysis",
@@ -95,40 +82,53 @@ PNGui <- navbarPage(id = "tabs",
                                           panel(title = "Strengths",
                                                 width = 300,
                                                 hidden = TRUE,
-                                                body = h1("Nothing here")
-                                          ),
+                                                body = div(
+                                                  hr(),
+                                                  verbatimTextOutput("debug"),
+                                                  hr(),
+                                                  p("Papua New Guinea has abundant natural resources which offer substantial revenue potential.
+With over 800 languages, PNG's cultural heritage is a significant asset, potentially attracting cultural tourism and enhancing social resilience.
+PNG also has a rich biodiversity, with vast rainforests and marine ecosystems that are important for both the environment and ecotourism.")
+                                                )),
                                           panel(
                                             title = "Weaknesses",
                                             width = 300,
-                                            color = "magenta",
                                             hidden = FALSE,
                                             body = div(
-                                              h3("Here is some info"),
                                               hr(),
                                               verbatimTextOutput("debug"),
                                               hr(),
-                                              p("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+                                              p("Inadequate infrastructure, particularly in transportation and healthcare, hinders economic development and access to services.
+And heavy reliance on extractive industries and agriculture makes the economy vulnerable to commodity price fluctuations and environmental challenges.
+Also the Issues with governance, corruption, and political instability can deter investment and hinder effective policy implementation. Besides, there is 
+limited access to quality education and healthcare services affects human capital development.")
                                             ),
                                             hr(),
                                             h2("More info")
                                           ),
                                           panel(
                                             title = "Opportunities",
-                                            width = 350,
-                                            collapsed = TRUE,
+                                            width = 300,
+                                            hidden = FALSE,
                                             body = div(
-                                              plotOutput("plot")
+                                              hr(),
+                                              verbatimTextOutput("debug"),
+                                              hr(),
+                                              p("Opportunities to develop sustainable industries, such as eco-tourism and sustainable agriculture, can drive economic growth while preserving the environment.
+PNG can leverage international partnerships for economic development, technological transfer, and climate change mitigation strategies.
+As mentioned in demographics, a young and growing population can provide a dynamic workforce if coupled with education and skill development.")
                                             )
                                           ),
                                           panel(
                                             title = "Threats",
-                                            can_collapse = FALSE,
+                                            hidden = FALSE,
                                             body = div(
+                                              hr(),
+                                              verbatimTextOutput("debug"),
+                                              hr(),
+                                              p("PNG is highly vulnerable to climate change impacts, including sea-level rise, which threaten its ecosystems and communities.
+Global economic shifts, particularly in commodity markets, can significantly impact PNG's economy.
+Public health issues, including the threat of pandemics and endemic diseases like malaria, pose significant challenges.")
                                             ),
                                             footer = HTML("Footer")
                                           )
@@ -169,8 +169,10 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
 # Define server logic for Papua New Guinea Shiny App
 PNGserver <- function(input, output, session) {
   
-  # Assuming you have a CSV with Papua New Guinea city data
+  # Reading datasets about cities and population
   png_cities <- read_csv(file = "pg.csv", show_col_types = FALSE)
+  
+  png_pop <- read_csv("fusion_GLOBAL_DATAFLOW_UNICEF_1.0_PNG.DM_POP_TOT. (1).csv")
   
   # Render map of Papua New Guinea with markers for cities
   output$pngMap <- renderLeaflet({
@@ -178,6 +180,13 @@ PNGserver <- function(input, output, session) {
       addProviderTiles(providers$OpenStreetMap) %>%
       setView(lng = 145.778055, lat = -6.314993, zoom = 6) %>%
       addMarkers(data = png_cities, popup = ~city)
+  })
+  
+  output$populationPlot <- renderPlot({
+    # Create the ggplot object
+    ggplot(png_pop, aes(x = png_pop$`TIME_PERIOD:Time period`, y = png_pop$`OBS_VALUE:Observation Value`)) +
+            geom_line() +
+            labs(title = "Population Trend in Papua New Guinea", x = "Year", y = "Population")
   })
   
   # Other outputs such as plots or tables can be added here
