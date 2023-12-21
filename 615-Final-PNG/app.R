@@ -6,6 +6,7 @@ library(shinydashboardPlus)
 library(leaflet)
 library(readr)
 library(ggplot2)
+library(dplyr)
 
 
 ### Don't forget to comment your code!!
@@ -128,37 +129,32 @@ As mentioned in demographics, a young and growing population can provide a dynam
                                               hr(),
                                               p("PNG is highly vulnerable to climate change impacts, including sea-level rise, which threaten its ecosystems and communities.
 Global economic shifts, particularly in commodity markets, can significantly impact PNG's economy.
-Public health issues, including the threat of pandemics and endemic diseases like malaria, pose significant challenges.")
-                                            ),
+Public health issues, including the threat of pandemics and endemic diseases like malaria, pose significant challenges.")),
+                                            
                                             footer = HTML("Footer")
                                           )
                                         )
                                         
                     )
-                    
-                    
+
                     ),
                     
                     navbarMenu(
                       title = "Bibliogrphy",
                       align = "right",
-                      tabPanel(tags$a(href="https://en.wikipedia.org/wiki/Kiribati",
-                                      "Wikipedia/Kiribati")),
+                      tabPanel(tags$a(href="https://en.wikipedia.org/wiki/Papua_New_Guinea",
+                                      "Wikipedia/Papua New Guinea")),
                       tabPanel(tags$a(href="https://www.shinyapps.io/",
                                       "shinyapps.io for publishing")),
                       
-                      
-                      tabPanel(tags$a(href="https://www.un.org/ohrlls/mvi/documents",
-                                      "Multidimensional Vulnerability Index")),
-                      
-                      tabPanel(tags$a(href = "https://kiribati.gov.ki/",
-                                      "Kiribati_gov")),
-                      tabPanel(tags$a(href="https://www.forumsec.org/",
-                                      "Pacific Islands Forum")),
+          
+                      tabPanel(tags$a(href="https://data.unicef.org",
+                                      "UNICEF")),
+          
+                      tabPanel(tags$a(href="https://databank.worldbank.org/reports.aspx?source=2&series=NY.GDP.PCAP.KD.ZG&country=IDN,TLS,FJI#",
+                                      "World Bank")),
                       tabPanel(tags$a(href="https://rstudio.github.io/leaflet/",
-                                      "Leaflet doc")),
-                      tabPanel(tags$a(href="https://www.un.org/ohrlls/mvi/documents",
-                                      "Multidimensional Vulnerability Index"))
+                                      "Leaflet doc"))
                       
                       
                     )
@@ -170,9 +166,11 @@ Public health issues, including the threat of pandemics and endemic diseases lik
 PNGserver <- function(input, output, session) {
   
   # Reading datasets about cities and population
-  png_cities <- read_csv(file = "pg.csv", show_col_types = FALSE)
+  png_cities <- read.csv(file = "pg.csv", show_col_types = FALSE)
   
-  png_pop <- read_csv("fusion_GLOBAL_DATAFLOW_UNICEF_1.0_PNG.DM_POP_TOT. (1).csv")
+  png_pop <- read.csv(file = "C:/Users/xianb/Downloads/MA 615/615Final2.0.1/615-Final-PNG/PNG population growth.csv")
+  
+  png_sub <- png_pop %>% select(`TIME_PERIOD:Time period`, `OBS_VALUE:Observation Value`)
   
   # Render map of Papua New Guinea with markers for cities
   output$pngMap <- renderLeaflet({
@@ -184,7 +182,7 @@ PNGserver <- function(input, output, session) {
   
   output$populationPlot <- renderPlot({
     # Create the ggplot object
-    ggplot(png_pop, aes(x = png_pop$`TIME_PERIOD:Time period`, y = png_pop$`OBS_VALUE:Observation Value`)) +
+    ggplot(png_sub, aes(x = `TIME_PERIOD:Time period`, y = `OBS_VALUE:Observation Value`)) +
             geom_line() +
             labs(title = "Population Trend in Papua New Guinea", x = "Year", y = "Population")
   })
