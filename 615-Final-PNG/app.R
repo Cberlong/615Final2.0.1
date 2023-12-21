@@ -61,7 +61,9 @@ PNGui <- navbarPage(id = "tabs",
                     nav_panel("Demographics",
                               p("Population Trends"),
                                        # This will display the plot from the server logic
-                                       plotOutput("populationPlot")
+                              img(src="PNG-population.png",
+                                  height="600",
+                                  width="800")
                               ,
                               p(style="font-size:12pt", "As shown above, the plot suggests that there is
                                 a growing trend in Papua New Guinea.")
@@ -170,7 +172,7 @@ PNGserver <- function(input, output, session) {
   
   png_pop <- read.csv(file = "C:/Users/xianb/Downloads/MA 615/615Final2.0.1/615-Final-PNG/PNG population growth.csv")
   
-  png_sub <- png_pop %>% select(`TIME_PERIOD:Time period`, `OBS_VALUE:Observation Value`)
+  png_sub <- png_pop %>% select("TIME_PERIOD.Time.period", "OBS_VALUE.Observation.Value")
   
   # Render map of Papua New Guinea with markers for cities
   output$pngMap <- renderLeaflet({
