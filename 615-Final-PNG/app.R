@@ -170,7 +170,7 @@ PNGserver <- function(input, output, session) {
   # Reading datasets about cities and population
   png_cities <- read.csv(file = "pg.csv", show_col_types = FALSE)
   
-  png_pop <- read.csv(file = "C:/Users/xianb/Downloads/MA 615/615Final2.0.1/615-Final-PNG/PNG population growth.csv")
+  png_pop <- read.csv(file = "PNG population growth.csv")
   
   png_sub <- png_pop %>% select("TIME_PERIOD.Time.period", "OBS_VALUE.Observation.Value")
   
